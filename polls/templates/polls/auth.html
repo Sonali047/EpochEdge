@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    {% load static %}
+    <link rel="icon" type="image/icon" href="{% static 'images/88.gif' %}">
+    
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'login_style.css' %}">
+
+
+    {% load static %}
+      <script src="{% static 'auth.js' %}" defer></script>
+</head>
+  <body>
+      <div class="wrapper">
+          <div class="form-wrapper sign-in">
+              <form class="login">
+                  <h2>Login</h2>
+                  <div class="input-group">
+                      <input type="text" id="Username-login" name="Username" required>
+                      <label for="Username">Username</label>
+                  </div>
+                  <div class="input-group">
+                      <input type="password" id="password-login" name="password" required>
+                      <label for="password">password</label>
+                        {% load static %}
+                        <img src="{% static 'images/pass-show.jpg' %}"
+                        class="pass-icon1 signin-show" id="pass-icon1">
+
+
+                      {% load static %}
+                      <img src="{% static 'images/pass-hide.jpg' %}"
+                      class="pass-icon1 signin-hide" id="pass-icon1">
+
+                  </div>
+                  <div class="remember">
+                      <label><input type="checkbox">Remember me</label>
+                  </div>
+                  <button type="submit">Login</button>
+                  
+            
+                    <div class="signUp-link">
+                      <p>Don't have an account? <a href="#" class="signUpBtn-link">sign Up</a></p>
+                  </div>
+              </form>
+          </div>
+
+
+
+          <div class="form-wrapper sign-up">
+              <form class="signup">
+                  <h2>Sign Up</h2>
+                  <div class="input-group">
+                      <input type="text" id="Username-signup" name="Username" required>
+                      <label for="Username">Username</label>
+                  </div>
+                  <!-- <div class="input-group">
+                      <input type="email" id="email" name="email" required>
+                      <label for="email">Email</label>
+                  </div> -->
+                  <div class="input-group">
+                      <input type="password" id="password-signup" name="password" required>
+                      <label for="password">password</label>
+                      {% load static %}
+                      <img src="{% static 'images/pass-show.jpg' %}"
+                      class="pass-icon1 signup-show" id="pass-icon1">
+                      {% load static %}
+                      <img src="{% static 'images/pass-hide.jpg' %}"
+                            class="pass-icon1 signup-hide" id="pass-icon2">
+                  </div>
+                  <div class="remember">
+                      <label><input type="checkbox">I agree to the terms & condition</label>
+                  </div>
+                  <button type="submit">Sign Up</button>
+                  <div class="signUp-link">
+                      <p>Already have an account? <a href="#" class="signInBtn-link">Sign In</a></p>
+                  </div>
+              </form>
+          </div>
+      </div>
+
+
+      
+  </body>
+</html>

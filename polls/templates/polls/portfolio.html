@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="icon" type="image/icon" href="{% static 'images/88.gif' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EpochEdge</title>
+    <!-- box icons -->
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- custom css -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'portfolio.css' %}">
+</head>
+<body>
+    <!--header designer-->
+    <header class="header">
+        <a href="auth/" class="logo"><i class="fa fa-camera" aria-hidden="true"> EpochEdge</i></a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="#home"> Home</a>
+            <a href="#About"> About</a>
+            <a href="#Features"> features</a>
+            <a href="#Contact"> Contact</a>
+
+
+        </nav>
+
+    </header>
+
+    <!-- home section design -->
+
+    <section class="home" id="home">
+            <div class="home-content">
+                <p><br><br><br></p>
+                <h3>Hello, It's the</h3>
+                <h1>EpochEdge group </h1>
+                <h3>A <span>Fullstack Developer Group</span></h3>
+                <p>Just feel free to take wounderful photos in any event because we are here to help you to collect those photos you want</p>
+                
+                <div class="social-media">
+                    <a href="#"><i class='bx bxl-facebook' ></i></a>
+                    <a href="#"><i class='bx bxl-twitter' ></i></a>
+                    <a href="#"><i class='bx bxl-instagram-alt' ></i></a>
+                    <a href="#"><i class='bx bxl-linkedin' ></i></a>
+                    <a href="#"><i class='bx bxl-youtube'></i></a>
+                </div>
+                <a href="/auth/" class="btn">SignUp\SignIn</a>
+            </div>
+
+
+            <div class="home-img">
+                {% load static %}
+                <img src="{% static 'images/dd.jpg' %}" alt="">
+            </div>
+    </section>
+
+    <!-- about section design -->
+    <section class="About" id="About">
+        <div class="About-img">
+            {% load static %}
+            <img src="{% static 'images/y.jpg' %}" alt="">
+
+        </div>
+
+        <div class="About-content">
+
+            <h2 class="heading">About Our <span>Project EpochEdge</span></h2>
+            <h3>Fullstack Developer!</h3>
+            <p>Suppose you attend an event and click photos in camera of a friend or photographer. That friend or photographer will upload all photos to "Upload your image" section of EpochEdge website. You just need to open the EpochEdge website and go to "Get all session image" section to download all images or "Get your image" section to download only those images you are present.</p>
+            <p><span>Important Note:</span> Photographer will upload the photos with a specific username called <span>Session username</span> and you must know that username to collect the images.</p>
+           
+        </div>
+
+    </section>
+
+    <!-- Features section design -->
+    <section class="Features" id="Features">
+        <div class="container" id="blur" >
+            <h2 class="heading">Our <span>Features</span></h2>
+            <div class="Features-container">
+                <div class="Features-box">
+                    <i class='bx bxs-download'></i>
+                    <h3>Get session images</h3>
+                    <p>its the best way to share your pictures to many people's with privacy and security</p>
+                    <a href="#popup" onclick="toggle()" class="btn">Read More</a>
+                </div>
+                
+                <div class="Features-box">
+                    <i class='bx bx-upload'></i>
+                    <h3>Upload your images</h3>
+                    <p>its the best way to share your pictures to many people's with privacy and security</p>
+                    <a href="#popup1" onclick="toggle1()" class="btn">Read More</a>
+                </div>
+    
+                <div class="Features-box">
+                    <i class='bx bxs-cloud-download'></i>
+                    <h3>Get your own images</h3>
+                    <p>its the best way to collect your pictures to your friends with privacy and security</p>
+                    <a href="#popup2" onclick="toggle2()" class="btn">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div id="popup">
+            <h1>How to get session image</h1>
+            <p>This section helps you to get all the images of the session or event you are attend.</p>
+            <p>Click on SignUp/SignIn → Features → Get all session image →Click on  Let's go → Enter the username of the Session → Your images will start to download automatically.</p>
+            <a href="#popup" class="btn1" onclick="toggle()">close</a>
+        </div>
+        <div id="popup1">
+            <h1>How to upload your images</h1>
+            <p>This section helps you to upload all the images of the event that the first step to reach the images to each attendee.</p>
+            <p>Click on SignUp/SignIn → Features → Upload your images → Click on Let's go → Enter the Session username → Choose the images and upload → View uploaded images → Back to the portal.</p>
+            <a href="#popup1" class="btn1" onclick="toggle1()">close</a>
+        </div>
+        <div id="popup2">
+            <h1>How to get your own images</h1>
+            <p>This section helps to get only those images you are present. It'd just need to scan your face.</p>
+            <p>Click on SignUp/SignIn → Features → Get your images → Click on Let's go → Enter the Session username → Click on Next → Take a snap → Your images will start to download automatically.</p>
+            <a href="#popup2" class="btn1" onclick="toggle2()">close</a>
+        </div>
+    </section>
+
+    <!-- contact section design -->
+    <section class="Contact" id="Contact">
+        <h2 class="heading">Contact <span>Me!</span></h2>
+        <form>
+            <div class="input-box">
+                <input type="text" placeholder="Full Name" class="full-name">
+                <input type="email" placeholder="Email Address" class="email-address">
+            </div>
+
+            <div class="input-box">
+                <input type="number" placeholder="Mobile Number" class="mobile-num">
+                <input type="text" placeholder="Email Subject" class="email-subject">
+            </div>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message" class="email-message"></textarea>
+            <button class="btn send-message">Send Message</button>
+        </form>
+    </section>
+
+    <!-- footer design -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p> created by <span>EpochEdge group</span> | all rights reserved</p>
+        </div>
+
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bxs-up-arrow-circle'></i></a>
+        </div>
+    </footer>
+
+    <!-- scroll reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script> 
+
+
+    <!--custome js-->
+    {% load static %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+</body>
+</html>
+
+

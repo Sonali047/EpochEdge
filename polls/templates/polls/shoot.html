@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    {% load static %}
+    <link rel="icon" type="image/icon" href="{% static 'images/88.gif' %}">
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webcam Capture</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "poppins", sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: url("/static/images/22.jpg");
+      }
+
+      .container {
+        position: relative;
+        width: 400px;
+        height: 600px;
+        background: orange;
+        box-shadow: 0 0 50px #0ef;
+        border-radius: 20px;
+        padding: 45px;
+        overflow: hidden;
+      }
+
+      .h1 {
+        font-size: 30px;
+        color: #fff;
+        text-align: center;
+      }
+
+      .v1 {
+        position: relative;
+        margin: 5px 0;
+        border-bottom: 1px solid #fff;
+      }
+      .v1 label {
+        position: absolute;
+        top: 1%;
+        left: 5px;
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: #fff;
+        pointer-events: none;
+        transition: 0.5s;
+      }
+
+      .v1 input {
+        width: 320px;
+        height: 40px;
+        font-size: 16px;
+        color: black;
+        padding: 0 5px;
+        background: transparent;
+        border: none;
+        outline: none;
+      }
+
+      .v1 input:focus ~ label,
+      .v1 input:valid ~ label {
+        top: -5px;
+      }
+      button {
+        text-align: center;
+        position: relative;
+        width: 100%;
+        height: 40px;
+        background: #0ef;
+        box-shadow: 0 0 10px #0ef;
+        font-size: 16px;
+        color: #000;
+        font-weight: 500;
+        cursor: pointer;
+        border-radius: 30px;
+        border: none;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Webcam Capture</h1>
+      <form class="hey">
+        <div class="v">
+          <video id="video">Video stream not available.</video>
+        </div>
+        <button class="take-photo">Take Photo</button>
+        <canvas id="canvas"> </canvas>
+        <img id="photo" alt="The screen capture will appear in this box." />
+
+        <div class="v1">
+          <label for="username">Your Username:</label>
+          <input type="text" name="username" id="username" required />
+        </div>
+        <br />
+
+        <br /><br />
+        <button type="submit" id="capture" name="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+  <script>
+    const video = document.getElementById("video"); // right
+    const captureButton = document.getElementById("capture"); // Changed selector to capture button
+    const imageInput = document.getElementById("image");
+    const canvas_over = document.getElementById("canvas");
+    const photo_out = document.getElementById("photo");
+    const click_photo = document.querySelector(".take-photo");
+    let form = document.querySelector(".hey");
+    const username = document.getElementById("username");
+    // me
+    let width = 320; // We will scale the photo width to this
+    let height = 0; // This will be computed based on the input stream
+    let streaming = false;
+
+    // Get user media
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: false })
+      .then((stream) => {
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch((err) => {
+        console.error("Error accessing webcam:", err);
+      });
+    video.addEventListener(
+      "canplay",
+      (ev) => {
+        if (!streaming) {
+          height = (video.videoHeight / video.videoWidth) * width;
+
+          video.setAttribute("width", width);
+          video.setAttribute("height", height);
+          canvas.setAttribute("width", width);
+          canvas.setAttribute("height", height);
+          streaming = true;
+        }
+      },
+      false
+    );
+
+    function takepicture() {
+      const context = canvas_over.getContext("2d");
+      if (width && height) {
+        canvas.width = width;
+        canvas.height = height;
+        context.drawImage(video, 0, 0, width, height);
+
+        const data = canvas.toDataURL("image/png");
+        photo_out.setAttribute("src", data);
+      }
+      video.style.display = "none";
+      click_photo.style.display = "none";
+      canvas_over.style.display = "none";
+    }
+    click_photo.addEventListener(
+      "click",
+      (ev) => {
+        takepicture();
+        ev.preventDefault();
+      },
+      false
+    );
+
+    // Capture image
+    // form.addEventListener("submit", (ev) => {
+    //   ev.preventDefault();
+    //   const canvas = document.createElement("canvas");
+    //   canvas.width = video.videoWidth;
+    //   canvas.height = video.videoHeight;
+    //   const context = canvas.getContext("2d");
+    //   context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    //   const imageDataURL = canvas.toDataURL("image/jpeg");
+    //   imageInput.src = imageDataURL;
+    // });
+
+    form.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      const bar = { username: username.value.trim(), image: photo_out.src };
+      const options = {
+        method: "POST",
+        body: JSON.stringify(bar),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      };
+      fetch("/process/", options)
+        .then((res) => {
+          if (!res.ok) {
+            alert("User does not exist");
+            return;
+          } else {
+            return res.blob();
+          }
+        })
+        .then((blob) => {
+          var file = window.URL.createObjectURL(blob);
+          window.location.assign(file);
+          setTimeout(() => {
+            location = "http://127.0.0.1:8000/success/";
+          }, 1000);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
+  </script>
+</html>
