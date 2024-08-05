@@ -361,8 +361,8 @@ def download_files(request):
         return response
 
 
-def portfolio_page(request):
-    template = loader.get_template("polls/portfolio.html")
+def index_page(request):
+    template = loader.get_template("polls/index.html")
     foo = {"zod": 2}
 
     return HttpResponse(template.render(foo, request))
